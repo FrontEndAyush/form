@@ -9,7 +9,7 @@
 }
 
 body {
-  width: 100%;
+  width: 100vw;
   background-color: hsl(148, 38%, 91%);
   height: 100%;
   font-family: "Karla", sans-serif;
