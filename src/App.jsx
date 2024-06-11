@@ -8,10 +8,11 @@ function App() {
   }
   return (
     <>
-      <div className="flex md:justify-center md:items-center p-6 h-screen">
-        <div className="md:w-[43vw] w-[100vw] h-[660px]   formBG">
+      <div className="flex md:justify-center md:items-center  h-screen">
+        <div className="md:w-[42vw] pl-2  w-[100vw] h-fit md:pb-0 pb-5 md:h-[660px]   formBG">
           <h1 className="text-[26px] font-semibold mt-5 ml-7 ">Contact Us</h1>
           <form>
+            {/* for firstname and lastname  */}
             <div className="flex flex-col  md:flex-row">
               <p className="ml-6 mt-4">
                 <label htmlFor="" className="text-[16px] ">
@@ -40,7 +41,7 @@ function App() {
                 />
               </p>
             </div>
-
+            {/* for email   */}
             <div>
               <p className="ml-6 mt-4">
                 <label htmlFor="" className="text-[16px] ">
@@ -57,32 +58,59 @@ function App() {
               </p>
             </div>
 
-            <div>
-              <div className="ml-6 mt-4 flex">
+            {/* for query type  */}
+            <div className="flex flex-col  md:flex-row">
+              <p className="ml-6 mt-4 relative">
                 <label htmlFor="" className="text-[16px] ">
                   Query Type <span className="ml-2">*</span>
                 </label>
                 <br />
                 <input
-                  type="text"
-                  className="border-2 inp cursor-pointer px-3  py-[11px] mt-2 rounded-lg formBorderColor w-[34vw] "
+                  type="radio"
+                  className="absolute top-12 left-7"
                   name=""
-                  required
-                  id="name"
+                  onClick={() => selectAOption(1)}
+                  checked={selectable == 1}
+                  id=""
                 />
-              </div>
-
-              <div className="ml-6 ">
+                <span className="absolute top-[43px] left-[50px]">
+                  General Query
+                </span>
                 <input
                   type="text"
-                  className="border-2 inp cursor-pointer px-3  py-[11px] mt-2 rounded-lg formBorderColor w-[34vw] "
+                  className="border-2 inp cursor-pointer px-3  py-[11px] mt-2 rounded-lg formBorderColor md:w-[17vw] w-[80vw]"
                   name=""
+                  required
+                  disabled
+                  id="name"
+                />
+              </p>
+              <p className="ml-6 md:mt-4 mt-0  relative">
+                <br />
+                <input
+                  type="radio"
+                  className="absolute top-12 left-7"
+                  name=""
+                  onClick={() => selectAOption(2)}
+                  checked={selectable == 2}
+                  id=""
+                />
+                <span className="absolute top-[43px]  left-[50px]">
+                  Supply Query
+                </span>
+                <input
+                  type="text"
+                  className="border-2 px-3 inp  py-[11px] mt-2 rounded-lg formBorderColor  md:w-[17vw] w-[80vw]"
+                  name=""
+                  disabled
+                  
                   required
                   id="name"
                 />
-              </div>
+              </p>
             </div>
 
+            {/* for message  */}
             <div>
               <p className="ml-6 mt-4">
                 <label htmlFor="" className="text-[16px] ">
@@ -109,12 +137,16 @@ function App() {
                 <span className="ml-2">*</span>
               </p>
             </div>
-            <button
-              type="submit"
-              className="w-[80vw] md:w-[36vw] mt-4 ml-6 text-white py-3 rounded-lg bg-[#0c7d69]"
-            >
-              Submit
-            </button>
+
+            {/* submit button  */}
+            <div className="relative">
+              <button
+                type="submit"
+                className="w-[80vw] md:w-[36vw] mt-4 ml-6 text-white py-3 rounded-lg bg-[#0c7d69]"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       </div>
