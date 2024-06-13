@@ -7,6 +7,7 @@ function App() {
   let [email, setEmail] = useState("");
   let [message, setMessage] = useState("");
   let [submitFormValue, setSubmitFormValue] = useState(0);
+  let [isTrue, setIsTrue] = useState(false);
 
   function selectAOption(num) {
     setSelectable(num);
@@ -28,6 +29,7 @@ function App() {
 
     setSubmitFormValue(value);
   }
+
   return (
     <>
       <div className="flex md:justify-center md:items-center  h-screen">
@@ -43,7 +45,9 @@ function App() {
                 <br />
                 <input
                   type="text"
-                  className={` border-2 inp cursor-pointer px-3  py-[11px] mt-2 rounded-lg formBorderColor md:w-[17vw] w-[80vw]`}
+                  className={` ${
+                    submitFormValue == 1 && firstName == "" ? "borderIn" : ""
+                  }  border-2   inp cursor-pointer px-3   py-[11px] mt-2 rounded-lg formBorderColor md:w-[17vw] w-[80vw]`}
                   name=""
                   onChange={(e) => forFirstNameFunc(e.target.value)}
                   id="name"
@@ -51,9 +55,9 @@ function App() {
                 <br />
 
                 <span
-                  className={`absolute  text-[hsl(0, 66%, 54%)] text-[14px] mt-2 ${
+                  className={`absolute  text-red-500 mt-1 text-[14px]  ${
                     submitFormValue == 1 && firstName == ""
-                      ? "block"
+                      ? "block "
                       : "hidden"
                   } mb-4`}
                 >
@@ -67,17 +71,17 @@ function App() {
                 <br />
                 <input
                   type="text"
-                  className="border-2 px-3 inp  py-[11px] mt-2 rounded-lg formBorderColor  md:w-[17vw] w-[80vw]"
+                  className={`border-2 px-3 inp  py-[11px] mt-2 rounded-lg ${
+                    submitFormValue == 1 && lastName == "" ? "borderIn" : ""
+                  } formBorderColor  md:w-[17vw]  w-[80vw]`}
                   name=""
                   onChange={(e) => forLastNameFunc(e.target.value)}
                   id="name"
                 />{" "}
                 <br />
                 <span
-                  className={`absolute  text-[hsl(0, 66%, 54%)] text-[14px] mt-2 ${
-                    submitFormValue == 1 && lastName == ""
-                      ? "block"
-                      : "hidden"
+                  className={`absolute  text-red-500 text-[14px]  ${
+                    submitFormValue == 1 && lastName == "" ? "block" : "hidden"
                   } mb-4`}
                 >
                   This field is empty
@@ -86,24 +90,24 @@ function App() {
             </div>
             {/* for email   */}
             <div>
-              <p className="ml-6 mt-12">
+              <p className="ml-6 mt-6">
                 <label htmlFor="" className="text-[16px] ">
                   Email <span className="ml-2">*</span>
                 </label>
                 <br />
                 <input
                   type="text"
-                  className=" border-2  px-3 inp inp  py-[11px] mt-2 rounded-lg formBorderColor md:w-[36vw] w-[80vw]"
+                  className={`border-2  ${
+                    submitFormValue == 1 && lastName == "" ? "borderIn" : ""
+                  }  px-3 inp inp  py-[11px] mt-2 rounded-lg formBorderColor md:w-[36vw] w-[80vw]`}
                   name=""
                   onChange={(e) => forEmailFunc(e.target.value)}
                   id="name"
                 />
                 <br />
                 <span
-                  className={`absolute  text-[hsl(0, 66%, 54%)] text-[14px] mt-2 ${
-                    submitFormValue == 1 && email == ""
-                      ? "block"
-                      : "hidden"
+                  className={`absolute mt-1  text-red-500 text-[14px]  ${
+                    submitFormValue == 1 && email == "" ? "block" : "hidden"
                   } mb-4`}
                 >
                   This field is empty
@@ -113,7 +117,7 @@ function App() {
 
             {/* for query type  */}
             <div className="flex flex-col  md:flex-row">
-              <p className="ml-6 mt-12 relative">
+              <p className="ml-6 mt-7 relative">
                 <label htmlFor="" className="text-[16px] ">
                   Query Type <span className="ml-2">*</span>
                 </label>
@@ -136,8 +140,15 @@ function App() {
                   disabled
                   id="name"
                 />
+                <span
+                  className={`absolute mt-1 text-red-500 text-[14px]  ${
+                    submitFormValue == 1 && selectable == 0 ? "block" : "hidden"
+                  } mb-4`}
+                >
+                  Atleast select one
+                </span>
               </p>
-              <p className="ml-6 md:mt-12 mt-0  relative">
+              <p className="ml-6 md:mt-7 mt-0  relative">
                 <br />
                 <input
                   type="radio"
@@ -147,7 +158,7 @@ function App() {
                   checked={selectable == 2}
                   id=""
                 />
-                <span className="absolute top-[43px]  left-[50px]">
+                <span className="absolute mt-1 top-[43px]  left-[50px]">
                   Supply Query
                 </span>
                 <input
@@ -162,7 +173,7 @@ function App() {
 
             {/* for message  */}
             <div>
-              <p className="ml-6 mt-4">
+              <p className="ml-6 mt-7">
                 <label htmlFor="" className="text-[16px] ">
                   Message<span className="ml-2">*</span>
                 </label>
@@ -174,14 +185,14 @@ function App() {
                   rows="4"
                   onChange={(e) => forMessageFunc(e.target.value)}
                   cols="50"
-                  className="w-[80vw] md:w-[36vw]  py-2 px-3 mt-2 border-2 rounded-lg formBorderColor "
+                  className={`w-[80vw] md:w-[36vw]  py-2 px-3 mt-2 border-2 rounded-lg formBorderColor ${
+                    submitFormValue == 1 && message == "" ? "borderIn" : ""
+                  } `}
                 ></textarea>
                 <br />
                 <span
-                  className={`absolute  text-[hsl(0, 66%, 54%)] text-[14px] mt-2 ${
-                    submitFormValue == 1 && message == ""
-                      ? "block"
-                      : "hidden"
+                  className={`absolute -mt-1  text-red-500 text-[14px] ${
+                    submitFormValue == 1 && message == "" ? "block" : "hidden"
                   } mb-4`}
                 >
                   This field is empty
@@ -191,15 +202,27 @@ function App() {
             </div>
 
             <div className="flex ml-6 mt-4">
-              <input type="radio" name="" id="" />
+              <input
+                type="radio"
+                onClick={() => setIsTrue(true)}
+                name=""
+                id=""
+              />
               <p className="text-[16px] ml-2">
                 I consent to be connected by the team{" "}
                 <span className="ml-2">*</span>
               </p>
             </div>
+            <span
+              className={`absolute -mt-0 text-red-500  ml-6 text-[14px]  ${
+                submitFormValue == 1 && isTrue == false ? "block" : "hidden"
+              } mb-4`}
+            >
+              Click to agree.
+            </span>
 
             {/* submit button  */}
-            <div className="relative">
+            <div className="relative mt-7">
               <button
                 type="submit"
                 className="w-[80vw] md:w-[36vw] mt-4 ml-6 text-white py-3 rounded-lg bg-[#0c7d69]"
