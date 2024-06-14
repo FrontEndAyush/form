@@ -8,6 +8,7 @@ function App() {
   let [message, setMessage] = useState("");
   let [submitFormValue, setSubmitFormValue] = useState(0);
   let [isTrue, setIsTrue] = useState(false);
+  let [showMessageSent, setShowMessageSent] = useState(false);
 
   function selectAOption(num) {
     setSelectable(num);
@@ -28,17 +29,31 @@ function App() {
     e.preventDefault();
 
     setSubmitFormValue(value);
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      email !== "" &&
+      message !== "" &&
+      isTrue == true &&
+      selectable == 1
+    ) {
+      setShowMessageSent(true);
+      setTimeout(function unShowAfterSomeTime() {
+        window.location.reload();
+        setShowMessageSent(false);
+      }, 2000);
+    }
   }
 
   return (
     <>
       <div className="flex md:justify-center md:items-center  h-screen">
-        <div className="md:w-[42vw] pl-2  w-[100vw] h-fit md:pb-0 pb-5 md:h-[730px]   formBG">
+        <div className="md:w-[42vw] pl-2  w-[100vw] h-fit md:pb-0 pb-5 md:h-[735px]   formBG">
           <h1 className="text-[26px] font-semibold mt-5 ml-7 ">Contact Us</h1>
           <form onSubmit={(e) => submitTheForm(e, 1)}>
             {/* for firstname and lastname  */}
             <div className="flex flex-col  md:flex-row">
-              <p className="ml-6 mt-4 relative">
+              <p className="ml-6 mt-7 relative">
                 <label htmlFor="" className="text-[16px] ">
                   Firstname <span className="ml-2">*</span>
                 </label>
@@ -64,7 +79,7 @@ function App() {
                   This field is empty
                 </span>
               </p>
-              <p className="ml-6 mt-4">
+              <p className="ml-6 mt-7">
                 <label htmlFor="" className="text-[16px] ">
                   Lastname <span className="ml-2">*</span>
                 </label>
@@ -96,7 +111,7 @@ function App() {
                 </label>
                 <br />
                 <input
-                  type="text"
+                  type="email"
                   className={`border-2  ${
                     submitFormValue == 1 && lastName == "" ? "borderIn" : ""
                   }  px-3 inp inp  py-[11px] mt-2 rounded-lg formBorderColor md:w-[36vw] w-[80vw]`}
@@ -222,15 +237,28 @@ function App() {
             </span>
 
             {/* submit button  */}
-            <div className="relative mt-7">
+            <div className="relative mt-5">
               <button
                 type="submit"
-                className="w-[80vw] md:w-[36vw] mt-4 ml-6 text-white py-3 rounded-lg bg-[#0c7d69]"
+                className="w-[80vw] md:w-[36vw] hover:bg-[#063F36] hover:transition-all hover:duration-300 mt-4 ml-6 text-white py-3 rounded-lg bg-[#0c7d69]"
               >
                 Submit
               </button>
             </div>
           </form>
+        </div>
+
+        <div
+          className={`border w-[370px] py-4 transition-shadow duration-300 transit absolute top-4 ${
+            showMessageSent == false ? "hidden" : "block"
+          }  px-4 bg-[#2A4244] text-white rounded-lg`}
+        >
+          <p className="">
+            <span></span>Message sent!
+          </p>
+          <p className="text-[15px] mt-1">
+            Thanks for filling up the form. we'll be in touch soon!{" "}
+          </p>
         </div>
       </div>
     </>
